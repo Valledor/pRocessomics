@@ -131,9 +131,32 @@ done!
 
 
 # Stage 2, Univariate Analysis
-Now, we have imputed, balance and, transform our data, we can explore our data. Following a classic approach we 
-
-
-Featureselection and univariate pRocessomics functions are devoted to this. With feature selection we can filter noisy variables by applying and InterQuartilRange based filter or an ANOVA/Kruskal-Wallis test.
-Moreover, univariate function allows us to get mean, standard deviation, pvalues, q values and post-hoc analysis. 
-
+Now, we have imputed, balance and, transform our data, we can explore our data. Following a classic approach we will perform an ANOVA test followed by Tukey HSD post hoc. We will employ irradiation time (column 1) as variable to define the different treatments. q-values will be also stimated
+```
+> Univariate.list<-univariate(datalist = my.transformandselect.list,initialrow = 1,initialcolumn = 2,treatment1col = 1,treatment2col = NULL,treatment = 1,parametric = TRUE,posthoc = TRUE,FDR = TRUE,round = 5)
+```
+The output of this test will be a list, containing original values, average per treatment, SD per treatment, p and q values. Results can be easily printed on screen or exported into Excel file. I.e. ANOVA p and q values, and also Tukey's for all pairs comparisons for the six first proteins in our dataset:
+```
+> print(Univariate.list$pvalue$proteome[1:6,1:6])
+        X6093823 X205829383 X383167485 X356997196 X383149096 X1168580
+p-value  0.01640    0.07305      0e+00    0.00001    0.00000  0.00000
+q-value  0.02111    0.08175      0e+00    0.00002    0.00000  0.00000
+2h-2d    0.92493    0.96300      0e+00    0.29221    0.00000  0.30820
+8h-2d    0.99862    0.99998      7e-05    0.00059    0.99919  0.00045
+C-2d     0.97202    0.93936      9e-05    0.99995    0.00000  1.00000
+r-2d     0.04394    0.16696      2e-05    0.00635    0.00000  0.00084
+```
+Table with mean + SD values is also generated
+```
+> print(Univariate.list$meansd$proteome[1:6,1:6])
+           Mean-2d        SD-2d     Mean-2h        SD-2h    
+X6093823   "-0.50702" "±" "0.06887" "-0.45496" "±" "0.1092" 
+X205829383 "-0.36619" "±" "0.02514" "-0.38547" "±" "0.01758"
+X383167485 "0"        "±" "0"       "-0.84328" "±" "0.01759"
+X356997196 "-0.02642" "±" "0.01776" "-0.07838" "±" "0.04301"
+X383149096 "-0.94231" "±" "0.01936" "0"        "±" "0"      
+X1168580   "-0.06125" "±" "0.01942" "-0.10329" "±" "0.04661"
+```
+Export table with all results of the analysis
+```
+export_table(Univariate.list, "univariate.xlsx")
