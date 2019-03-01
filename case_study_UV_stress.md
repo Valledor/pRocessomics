@@ -192,10 +192,9 @@ export_plot(vennexport,"venn.pdf")
 
 This is the plot that we created:
 
-<img src="/img/vennplot.png" width="500" align="center">
-
+<img src="/img/vennplot.png" width="500" align="middle" alt="Processomics Venn plot">
 
 ## Mapman clustering
 
-
+If annotated according MapMan classification, functional representation and clustering can be performed.
 
