@@ -12,3 +12,81 @@ The different elements in the list should be named (proteins, metabolites, etc.)
 If you have troubles importing your data into pRocessomics, **please check this tutorial**
 
 For this case stady you only need to load sample dataset 
+
+# Stage 1, data pre-processing
+Before exploring our data, few considerations may be taken into account: as omics datasets are often obtained from mass spectrometry techniques, such as proteome and metabolome, some values can be missed, or may need a global abundance scaling. To overcome these issues, the first step in our analysis is to run preprocess_omic_list function. This function will perform missing data imputation, empty columns removal and abundance balancing.
+
+## Missing value imputation
+There are three available options: using a RandomForest algorithm, k-nearest neighbour and do not imput missing values. This argument can be provided as a vector defining the desired operation for each omic layer in the dataset. In our case study we will employ different methods to illustrate the capability of pRocessomics
+
+## Abundance balancing
+pRocessomics has implemented three kinds of abundance scaling: sample (relative amount of each variable within samples, as percentage; gives really small values, not easy to interpret), treatment intensity (normalized by all samples within each treatment) and average intensity (percentage multiplied for the average total intensity of samples, this is proportional to the first approach, but numbers are bigger, in "real-world" ranges, and in consequence easier to interpret). When dealing with biological samples it is very important to make sure that numerical values can be compared across samples. We must control differences due to bad sample loading, missquantification of initial amounts, etc. 
+
+## Source code for this initial step
+```
+  > my.preprocessed.list <- preprocess_omic_list(datalist = datalist, initialrow = 1,
+      initialcolumn = 2,treatment1col = 1,treatment2col = NULL,treatment = 1, 
+      imputation = c("KNN","RF","none","none"),abdbal = c("AvgIntensity","AvgIntensity","none","none"),
+      threshold = 0.34,k = 2,parallel = TRUE)
+```
+  Expected output:
+```
+  MISSING VALUE IMPUTATION
+Multiple processor cores (4) will be used. It may take a while...
+KNN method will be used for proteome dataset
+RF method will be used for metabolome dataset
+none method will be used for genexpression dataset
+none method will be used for physiology dataset
+
+Processing proteome dataset
+Original data contained 5359 zeroes and 0 NAs in  669  and  0  variables, respectively. After processing 796 values present in  439 variables have been considered suitable for imputation according to the defined 0.34 threshold.
+Missing values have been imputed according to KNN method.
+
+Processing metabolome dataset
+Original data contained 8 zeroes and 0 NAs in  5  and  0  variables, respectively. After processing 5 values present in  5 variables have been considered suitable for imputation according to the defined 0.34 threshold.
+  missForest iteration 1 in progress...done!
+  missForest iteration 2 in progress...done!
+  missForest iteration 3 in progress...done!
+  missForest iteration 4 in progress...done!
+Missing values have been imputed according to RF method.
+
+Processing genexpression dataset
+Original data contained 0 zeroes and 0 NAs in  0  and  0  variables, respectively. After processing no variable has been considered suitable for imputation according to the defined 0.34 threshold.
+
+Processing physiology dataset
+Original data contained 0 zeroes and 0 NAs in  0  and  0  variables, respectively. After processing no variable has been considered suitable for imputation according to the defined 0.34 threshold.
+
+REMOVING EMPTY COLUMNS OF ALL DATASETS
+Single processor core will be used. It may take a while...
+
+ABUNDANCE BALANCING
+Single processor core will be used. It may take a while...
+AvgIntensity balancing will be used for proteome dataset
+AvgIntensity balancing will be used for metabolome dataset
+none balancing will be used for genexpression dataset
+none balancing will be used for physiology dataset
+
+Processing proteome dataset
+Processing metabolome dataset
+Processing genexpression dataset
+Processing physiology dataset
+
+
+SUMMARY: Dataset imputation and balancing
+-----------------------------------------
+proteome, metabolome, genexpression, physiology datasets were considered
+ 
+ 
+Missing value imputation.........
+proteome, metabolome were respectively imputed employing KNN, RF methods. 
+2 neighbors were employed for KNN calculations 
+Minimum percentage of significant values per variable/treatment to allow 
+imputation was  0.34 
+Run in parallel TRUE 
+ 
+Abundance balancing.........
+proteome, metabolome were respectively balanced employing AvgIntensity, 
+AvgIntensity methods.
+
+ Job finished!
+
