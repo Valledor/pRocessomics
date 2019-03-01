@@ -3,21 +3,21 @@ Download and install this package from repository
 
 # Data import
 Already attached dataset is a list class object and contains four omic layers: proteome, metabolome, gene expression and, physiology. This dataset comes from an adaptive study of pinus radiata upon UV stress (Pascual et al., 2016).
-Please note all listed omic layers are named and follow the same main structure, the treatment column is always located at the same position and also do the numeric data (columns & rows)
+Please note all listed omic layers are named and follow the same main structure, the treatment column is always located at the same position and also do the numeric data (columns & rows).
 
 **Having an adequate data structure is required for working with pRocessomics**. If you overcome this obstacle, the use of this package will be very simple.
 
 This package is meant to work with lists, even if you only want to process a single omic dataset you need your table to be in a list.
-The different elements in the list should be named (proteins, metabolites, etc.) and have the same number of rows. Each row correspond to a sample. Samples should have the same order within the different datasets to be analyzed (if you want to integrate the different datasets)
-If you have troubles importing your data into pRocessomics, **please check this tutorial**
+The different elements in the list should be named (proteins, metabolites, etc.) and have the same number of rows. Each row correspond to a sample. Samples should have the same order within the different datasets to be analyzed (if you want to integrate the different datasets).
+If you have troubles importing your data into pRocessomics, **please check this tutorial**.
 
-For this case stady you only need to load sample dataset 
+For this case stady you only need to load sample dataset. 
 
 # Stage 1, data pre-processing
 Before exploring our data, few considerations may be taken into account: as omics datasets are often obtained from mass spectrometry techniques, such as proteome and metabolome, some values can be missed, or may need a global abundance scaling. To overcome these issues, the first step in our analysis is to run preprocess_omic_list function. This function will perform missing data imputation, empty columns removal and abundance balancing.
 
 ## Missing value imputation
-There are three available options: using a RandomForest algorithm, k-nearest neighbour and do not imput missing values. This argument can be provided as a vector defining the desired operation for each omic layer in the dataset. In our case study we will employ different methods to illustrate the capability of pRocessomics
+There are three available options: using a RandomForest algorithm, k-nearest neighbour and do not imput missing values. This argument can be provided as a vector defining the desired operation for each omic layer in the dataset. In our case study we will employ different methods to illustrate the capability of pRocessomics.
 
 ## Abundance balancing
 pRocessomics has implemented three kinds of abundance scaling: sample (relative amount of each variable within samples, as percentage; gives really small values, not easy to interpret), treatment intensity (normalized by all samples within each treatment) and average intensity (percentage multiplied for the average total intensity of samples, this is proportional to the first approach, but numbers are bigger, in "real-world" ranges, and in consequence easier to interpret). When dealing with biological samples it is very important to make sure that numerical values can be compared across samples. We must control differences due to bad sample loading, missquantification of initial amounts, etc. 
@@ -179,6 +179,21 @@ export_table(Univariate.list, "univariate.xlsx")
 ```
 
 ## Venn
+With this package we can easily draw Venn diagrams. In our example we will compare 4 experimental treatments at protein level. This function is prepare to draw plots when data have more than one treatment. As in other plots Venn analysis is a two step process. First we generate Venn object, and then we plot and export it
+```
+# Generation of Venn object
+uv_venn_proteins <- Venn_group(datalist = my.preprocessed.list,initialrow = 4,initialcolumn = 2,treatment1col = 1,treatment = 1,omiclevel = "proteome")
+# Plot Venn object
+Venn_plot(uv_venn_proteins)
+# Export Venn object
+vennexport <- Venn_plot(uv_venn_proteins)
+export_plot(vennexport,"venn.pdf")
+```
+
+This is the plot that we created:
+
+<img src="/img/vennplot.png" width="500" align="center">
+
 
 ## Mapman clustering
 
