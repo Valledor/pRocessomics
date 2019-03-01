@@ -198,3 +198,8 @@ This is the plot that we created:
 
 If annotated according MapMan classification, functional representation and clustering can be performed.
 
+<img src="/img/vennplot.png" width="500" align="middle" alt="Processomics Venn plot">
+<img src="/img/vennplot.png" width="500" align="middle" alt="Processomics Venn plot">
+
+
+
