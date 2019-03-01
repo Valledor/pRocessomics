@@ -18,20 +18,20 @@ pRocessomics makes the integration of different omic levels easy
 
 # Our approach
 Our approach is based on performing a sequential analysis to juice our data.
-* Stage 1, data pre-processing
+* Stage 1, data pre-processing; Get our data ready to work with.
   * Missing value imputation
   * Abundance balancing
   * Data transformation
   * Filtering
-* Stage 2, Univariate analysis
+* Stage 2, Univariate analysis; Classic approach.
   * Parametric (t-test, one and two ways ANOVAs, post hocs, ...)
   * Non-parametric (u-test, Kruskal-Wallis, post hocs, ...)
   * Distribution plots, boxplots, etc.
-* Stage 3, Multivariate analysis
+* Stage 3, Multivariate analysis; Reveal most relevant variables. Integrate different omic levels. Build meaningful networks.
   * PCA, ICA, DA, RF...
   * Integration of different omic levels (sPLS, MCIA, DIABLO)
   * Mapman and String
-* Common features
+* Common features.
   * Sample subsetting based on feature selection
   * Easy vectorial and image exports
   * Tables can be exported in a ready-to-publish format
