@@ -7,6 +7,7 @@ pRocessomics makes the integration of different omic levels easy
 * [Valledor Lab Website](http://www.valledor.info/)
 * [Processomics @ Valledor.info](http://processomics.valledor.info/)
 * [Download package](bin/pRocessomics_alpha.gz)
+* [Case study-Walkthrough]()
 
 # The problem
 *"I love writing scripts for omic data processing and statistical analyses!"* -- no one, ever
@@ -16,7 +17,25 @@ pRocessomics makes the integration of different omic levels easy
 <img alt="Processomics plots" align="center" src="img/plots_processomics.jpg">
 
 # Our approach
-
+Our approach is based on performing a sequential analysis to juice our data.
+* Stage 1, data pre-processing
+  * Missing value imputation
+  * Abundance balancing
+  * Data transformation
+  * Filtering
+* Stage 2, Univariate analysis
+  * Parametric (t-test, one and two ways ANOVAs, post hocs, ...)
+  * Non-parametric (u-test, Kruskal-Wallis, post hocs, ...)
+  * Distribution plots, boxplots, etc.
+* Stage 3, Multivariate analysis
+  * PCA, ICA, DA, RF...
+  * Integration of different omic levels (sPLS, MCIA, DIABLO)
+  * Mapman and String
+* Common features
+  * Sample subsetting based on feature selection
+  * Easy vectorial and image exports
+  * Tables can be exported in a ready-to-publish format
+  * Some outputs are Cytoscape compatible
 
 # About this document
 This document started as internal draft. Some sections might not be clear, package is yet incomplete, bugs are expected, and a lot of features will be soon introduced. Please feel free  to open a GitHub issue.
