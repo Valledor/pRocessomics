@@ -13,6 +13,8 @@ pRocessomics makes the integration of different omic levels easy
 
 **pRocessomics** is a simple but feature-rich pipeline for the statistical process of omics datasets. It was born out of the observation that this process is annoying and sometimes confusing; furthermore all the individual pieces of the process exist already but the available integrative solutions either don’t work, lack functions, are overly complicated or rely on non-free software. With **pRocessomics** you can perform state-of-the-art analyses done in less than 6 lines of code! And the best part is that you don’t almost even need to know R to use **pRocessomics** if you follow our detailed case studies! Furthermore a Shiny-based point-and-click interface is coming soon!
 
+<img alt="Processomics plots" align="center" src="img/plots_processomics.jpg">
+
 # Our approach
 
 
@@ -26,7 +28,7 @@ Copyright 2019 Luis Valledor / Laura Lamelas
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
-You may obtain a copy of the License at [Apache Foundation] (http://www.apache.org/licenses/LICENSE-2.0)
+You may obtain a copy of the License at [Apache Foundation](http://www.apache.org/licenses/LICENSE-2.0)
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
