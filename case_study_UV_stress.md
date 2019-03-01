@@ -131,6 +131,7 @@ done!
 
 
 # Stage 2, Univariate Analysis
+## ANOVA
 Now, we have imputed, balance and, transform our data, we can explore our data. Following a classic approach we will perform an ANOVA test followed by Tukey HSD post hoc. We will employ irradiation time (column 1) as variable to define the different treatments. q-values will be also stimated
 ```
 > Univariate.list<-univariate(datalist = my.transformandselect.list,initialrow = 1,initialcolumn = 2,treatment1col = 1,treatment2col = NULL,treatment = 1,parametric = TRUE,posthoc = TRUE,FDR = TRUE,round = 5)
@@ -146,7 +147,7 @@ q-value  0.02111    0.08175      0e+00    0.00002    0.00000  0.00000
 C-2d     0.97202    0.93936      9e-05    0.99995    0.00000  1.00000
 r-2d     0.04394    0.16696      2e-05    0.00635    0.00000  0.00084
 ```
-Table with mean + SD values is also generated
+Table with mean + SD values is also generated:
 ```
 > print(Univariate.list$meansd$proteome[1:6,1:6])
            Mean-2d        SD-2d     Mean-2h        SD-2h    
@@ -157,6 +158,29 @@ X356997196 "-0.02642" "±" "0.01776" "-0.07838" "±" "0.04301"
 X383149096 "-0.94231" "±" "0.01936" "0"        "±" "0"      
 X1168580   "-0.06125" "±" "0.01942" "-0.10329" "±" "0.04661"
 ```
-Export table with all results of the analysis
+And also a table with mean, SD, and statisticals:
+```
+> Univariate.list$composite$proteome[1:4,]
+           Mean-2d        SD-2d     Mean-2h        SD-2h     Mean-8h        SD-8h     Mean-C         SD-C      Mean-r         SD-r      p-value   q-value  
+X6093823   "-0.50692" "±" "0.06889" "-0.45499" "±" "0.10882" "-0.52451" "±" "0.01392" "-0.54605" "±" "0.06494" "-0.2872"  "±" "0.10349" "0.01624" "0.0209" 
+X205829383 "-0.36609" "±" "0.02512" "-0.3855"  "±" "0.01733" "-0.36886" "±" "0.01717" "-0.34391" "±" "0.06011" "-0.29187" "±" "0.04165" "0.07156" "0.08025"
+X383167485 "0"        "±" "0"       "-0.84331" "±" "0.01733" "-0.52565" "±" "0.01717" "-0.51003" "±" "0.05293" "-0.59065" "±" "0.16353" "0"       "0"      
+X356997196 "-0.02632" "±" "0.01778" "-0.07841" "±" "0.04264" "-0.18457" "±" "0.01272" "-0.02351" "±" "0.02215" "0.08875"  "±" "0.04254" "1e-05"   "2e-05"  
+           2h-2d     8h-2d     C-2d      r-2d      8h-2h     C-2h      r-2h      C-8h      r-8h      r-C      
+X6093823   "0.92517" "0.99861" "0.97161" "0.04361" "0.81792" "0.64086" "0.14788" "0.99695" "0.02866" "0.0172" 
+X205829383 "0.9616"  "0.99998" "0.93949" "0.16483" "0.97781" "0.6385"  "0.06105" "0.91098" "0.14358" "0.44517"
+X383167485 "0"       "7e-05"   "9e-05"   "2e-05"   "0.00374" "0.00264" "0.01708" "0.99904" "0.83836" "0.71295"
+X356997196 "0.28944" "0.00058" "0.99996" "0.00632" "0.01079" "0.24831" "0.00037" "0.00051" "0"       "0.00747"
+```
+
+You can export table above directly to excel file:
 ```
 export_table(Univariate.list, "univariate.xlsx")
+```
+
+## Venn
+
+## Mapman clustering
+
+
+
