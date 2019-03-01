@@ -209,10 +209,13 @@ Since we employ Plot.ly, you can make zoom or select treatments in order to expl
 
 <img src="/img/abundance_mapman_zoom.png" width="500" align="middle" alt="Processomics Venn plot">
 
-If annotated according MapMan classification, functional representation and clustering can be performed.
-
-
+Heatmaps can also be plot with ease
+```
+> mapman_plot(uvmapman, plottype = "heatmap")
+```
 <img src="/img/heatmap_mapman.png" width="500" align="middle" alt="Processomics Venn plot">
 
 
-
+# Stage 3, Multivariate Analysis and integration of omic levels
+...work in progress...
+please check back soon!
