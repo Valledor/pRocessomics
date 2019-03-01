@@ -195,11 +195,24 @@ This is the plot that we created:
 <img src="/img/vennplot.png" width="500" align="middle" alt="Processomics Venn plot">
 
 ## Mapman clustering
+If mapman annotations are available, we can take advantage and get descriptive statistics and classifications considering functional groups. First of all we need to define a mapman group. We can define multiple parameters here in order to group variables, treatments... please have a deeper look onto documentation.
+```
+> uvmapman<-mapman_group(my.preprocessed.list,UVdataset_ids,initialrow = 1,initialcolumn = 2,treatment1col = 1,omiclevel = "proteome")
+```
+Once groups are defined, we can plot data in different ways. We can get an overview of how different functional categories change with the different treatments:
+```
+> mapman_plot(uvmapman)
+```
+<img src="/img/abundance_mapman.png" width="500" align="middle" alt="Processomics Venn plot">
+
+Since we employ Plot.ly, you can make zoom or select treatments in order to explore your data. Below you can see a detail of the plot above, but filtering out control (C) and recovered (r) treatments.
+
+<img src="/img/abundance_mapman_zoom.png" width="500" align="middle" alt="Processomics Venn plot">
 
 If annotated according MapMan classification, functional representation and clustering can be performed.
 
-<img src="/img/vennplot.png" width="500" align="middle" alt="Processomics Venn plot">
-<img src="/img/vennplot.png" width="500" align="middle" alt="Processomics Venn plot">
+
+<img src="/img/heatmap_mapman.png" width="500" align="middle" alt="Processomics Venn plot">
 
 
 
