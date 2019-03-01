@@ -22,7 +22,7 @@ There are three available options: using a RandomForest algorithm, k-nearest nei
 ## Abundance balancing
 pRocessomics has implemented three kinds of abundance scaling: sample (relative amount of each variable within samples, as percentage; gives really small values, not easy to interpret), treatment intensity (normalized by all samples within each treatment) and average intensity (percentage multiplied for the average total intensity of samples, this is proportional to the first approach, but numbers are bigger, in "real-world" ranges, and in consequence easier to interpret). When dealing with biological samples it is very important to make sure that numerical values can be compared across samples. We must control differences due to bad sample loading, missquantification of initial amounts, etc. 
 
-## Source code for this initial step
+### Source code
 ```
   > my.preprocessed.list <- preprocess_omic_list(datalist = datalist, initialrow = 1,
       initialcolumn = 2,treatment1col = 1,treatment2col = NULL,treatment = 1, 
@@ -89,4 +89,51 @@ proteome, metabolome were respectively balanced employing AvgIntensity,
 AvgIntensity methods.
 
  Job finished!
+```
+## Data transformation and filtering
+
+Sometimes, it may be useful apply a mathematical transformation to the data, in order to get a normal distribution, or eliminate noisy or almost empty variables, to this end transformandselect function can be used as follows:
+
+### Source code
+```
+> my.transformandselect.list<-transformandselect(datalist = my.preprocessed.list,initialrow = 1,initialcolumn = 2,treatment1col = 1,treatment2col = 1,treatment = 1,transf = c("Log10","Log10","none","z"),varsel = TRUE,varselthld = 0.4,varcoef = FALSE,varcoefthld = NULL)
+```
+  Expected output:
+```
+TRANSFORMATION OF DATASETS
+Single processor core will be used. It may take a while...
+Log10 transformation method will be used for proteome dataset
+Log10 transformation method will be used for metabolome dataset
+none transformation method will be used for genexpression dataset
+z transformation method will be used for physiology dataset
+
+Processing proteome dataset
+Processing metabolome dataset
+Processing genexpression dataset
+Processing physiology dataset
+SELECTING VARIABLES BASED ON CONSISTENCY
+Single processor core will be used. It may take a while...
+
+Processing proteome dataset
+Variable Selection based on consistency. Variable was present at least on 6  cases, or all replicates of a treatment
+Initial Variables:  1228  Selected Variables:  1228  Removed Variables:  0
+Processing metabolome dataset
+Variable Selection based on consistency. Variable was present at least on 6  cases, or all replicates of a treatment
+Initial Variables:  118  Selected Variables:  118  Removed Variables:  0
+Processing genexpression dataset
+Variable Selection based on consistency. Variable was present at least on 6  cases, or all replicates of a treatment
+Initial Variables:  6  Selected Variables:  6  Removed Variables:  0
+Processing physiology dataset
+Variable Selection based on consistency. Variable was present at least on 6  cases, or all replicates of a treatment
+Initial Variables:  5  Selected Variables:  5  Removed Variables:  0
+done!
+```
+
+
+# Stage 2, Univariate Analysis
+Now, we have imputed, balance and, transform our data, we can explore our data. Following a classic approach we 
+
+
+Featureselection and univariate pRocessomics functions are devoted to this. With feature selection we can filter noisy variables by applying and InterQuartilRange based filter or an ANOVA/Kruskal-Wallis test.
+Moreover, univariate function allows us to get mean, standard deviation, pvalues, q values and post-hoc analysis. 
 
