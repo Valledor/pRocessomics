@@ -1,0 +1,15 @@
+Package: pRocessomics
+Type: Package
+Title: Omics Data Processing Functions and Integration Tools
+Version: 0.1.1
+Author: Luis Valledor (y quien toque)
+Maintainer: Luis Valledor <valledorluis@uniovi.es>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: Share Alike...
+Depends: R (>= 3.5), MASS, lattice, ggplot2
+Imports: igraph, rgl, ellipse, corpcor, RColorBrewer, parallel, dplyr,
+        tidyr, reshape2, methods, matrixStats, rARPACK, gridExtra,mixOmics,
+        plotly
+Encoding: UTF-8
+LazyData: true
