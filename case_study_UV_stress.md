@@ -13,6 +13,12 @@ If you have troubles importing your data into pRocessomics, **please check this 
 
 For this case stady you only need to load sample dataset. 
 
+### Source code
+```
+  > library("pRocessomics)
+  > datalist <- pRocessomics::UVdataset
+```
+
 # Stage 1, data pre-processing
 Before exploring our data, few considerations may be taken into account: as omics datasets are often obtained from mass spectrometry techniques, such as proteome and metabolome, some values can be missed, or may need a global abundance scaling. To overcome these issues, the first step in our analysis is to run preprocess_omic_list function. This function will perform missing data imputation, empty columns removal and abundance balancing.
 
@@ -134,7 +140,7 @@ done!
 ## ANOVA
 Now, we have imputed, balance and, transform our data, we can explore our data. Following a classic approach we will perform an ANOVA test followed by Tukey HSD post hoc. We will employ irradiation time (column 1) as variable to define the different treatments. q-values will be also stimated
 ```
-> Univariate.list<-univariate(datalist = my.transformandselect.list,initialrow = 1,initialcolumn = 2,treatment1col = 1,treatment2col = NULL,treatment = 1,parametric = TRUE,posthoc = TRUE,FDR = TRUE,round = 5)
+> Univariate.list <- univariate(datalist = my.transformandselect.list,initialrow = 1,initialcolumn = 2,treatment1col = 1,treatment2col = NULL,treatment = 1,parametric = TRUE,posthoc = TRUE,FDR = TRUE,round = 5)
 ```
 The output of this test will be a list, containing original values, average per treatment, SD per treatment, p and q values. Results can be easily printed on screen or exported into Excel file. I.e. ANOVA p and q values, and also Tukey's for all pairs comparisons for the six first proteins in our dataset:
 ```
@@ -147,7 +153,7 @@ q-value  0.02111    0.08175      0e+00    0.00002    0.00000  0.00000
 C-2d     0.97202    0.93936      9e-05    0.99995    0.00000  1.00000
 r-2d     0.04394    0.16696      2e-05    0.00635    0.00000  0.00084
 ```
-Table with mean + SD values is also generated:
+Table with mean ± SD values is also generated:
 ```
 > print(Univariate.list$meansd$proteome[1:6,1:6])
            Mean-2d        SD-2d     Mean-2h        SD-2h    
@@ -175,19 +181,19 @@ X356997196 "0.28944" "0.00058" "0.99996" "0.00632" "0.01079" "0.24831" "0.00037"
 
 You can export table above directly to excel file:
 ```
-export_table(Univariate.list, "univariate.xlsx")
+> export_table(Univariate.list, "univariate.xlsx")
 ```
 
 ## Venn
 With this package we can easily draw Venn diagrams. In our example we will compare 4 experimental treatments at protein level. This function is prepare to draw plots when data have more than one treatment. As in other plots Venn analysis is a two step process. First we generate Venn object, and then we plot and export it
 ```
 # Generation of Venn object
-uv_venn_proteins <- Venn_group(datalist = my.preprocessed.list,initialrow = 4,initialcolumn = 2,treatment1col = 1,treatment = 1,omiclevel = "proteome")
+> uv_venn_proteins <- Venn_group(datalist = my.preprocessed.list,initialrow = 4,initialcolumn = 2,treatment1col = 1,treatment = 1,omiclevel = "proteome")
 # Plot Venn object
-Venn_plot(uv_venn_proteins)
+> Venn_plot(uv_venn_proteins)
 # Export Venn object
-vennexport <- Venn_plot(uv_venn_proteins)
-export_plot(vennexport,"venn.pdf")
+> vennexport <- Venn_plot(uv_venn_proteins)
+> export_plot(vennexport,"venn.pdf")
 ```
 
 This is the plot that we created:
@@ -197,7 +203,7 @@ This is the plot that we created:
 ## Mapman clustering
 If mapman annotations are available, we can take advantage and get descriptive statistics and classifications considering functional groups. First of all we need to define a mapman group. We can define multiple parameters here in order to group variables, treatments... please have a deeper look onto documentation.
 ```
-> uvmapman<-mapman_group(my.preprocessed.list,UVdataset_ids,initialrow = 1,initialcolumn = 2,treatment1col = 1,omiclevel = "proteome")
+> uvmapman <- mapman_group(my.preprocessed.list,UVdataset_ids,initialrow = 1,initialcolumn = 2,treatment1col = 1,omiclevel = "proteome")
 ```
 Once groups are defined, we can plot data in different ways. We can get an overview of how different functional categories change with the different treatments:
 ```
@@ -217,5 +223,53 @@ Heatmaps can also be plot with ease
 
 
 # Stage 3, Multivariate Analysis and integration of omic levels
+## Principal Component Analysis
+To further explore the dataset, several analyses can be performed, as Principal Component Analysis (PCA) for complexity reduction:
+*Please note omiclevel = ”all” means all datasets will be concatenated to be the input of a single analysis*
+```
+> PCAdata <- pca_analysis(my.preprocessed.list, annotation = NULL, initialrow = 1, initialcolumn = 2, treatment1col = 1, 
+treatment2col = NULL, treatment = 1, omiclevel = "all")
+```
+Eigenvalues and cumulative explained variance can be extracted from PCAdata as follows:
+```
+> Eigenvalues <- PCAdata$pca$sdev^2
+> Eigenvalues
+
+ [1] 4.536145e+02 2.419394e+02 2.200830e+02 1.907880e+02 6.925143e+01 3.584663e+01 3.022390e+01 2.417656e+01 2.175143e+01
+[10] 1.931031e+01 1.815384e+01 1.671216e+01 1.489778e+01 2.511445e-01 9.499836e-29
+
+> explainedvariance <- round((PCAdata$pca$sdev^2)*100/sum(PCAdata$pca$sdev^2),2) 
+> explainedvariance
+ [1] 33.43 17.83 16.22 14.06  5.10  2.64  2.23  1.78  1.60  1.42  1.34  1.23  1.10  0.02  0.00
+
+> cumulative_exp_var<-cumsum(explainedvariance)
+> cumulative_exp_var
+ [1]  33.43  51.26  67.48  81.54  86.64  89.28  91.51  93.29  94.89  96.31  97.65  98.88  99.98
+[14] 100.00 100.00
+```
+PCA loadings can be accessed as:
+```
+> PCAdata$pca$rotation
+```
+To plot:
+```
+> pca_plot(pca_list = PCAdata,treatment = 1,compX = 1,compY = 2,compZ = NULL,plottype = "Score",useannot = FALSE)
+> pca_plot(pca_list = PCAdata,treatment = 1,compX = 1,compY = 2,compZ = NULL,plottype = "Scree",useannot = FALSE)
+```
+<img src="/img/PCA_Score_plot.png" width="500" align="middle" alt="pRocessomics PCA Scoreplot">
+<img src="/img/PCA_Scree_plot.png" width="500" align="middle" alt="pRocessomics PCA Screeplot">
+
+## Kmeans clustering
+In addition to those variables or principal components, to further analyse our data we can perform a K-means clustering, with the aim of depict the different co-expression or co-abundance patterns:
+```
+> my.kmeans <- kmeans_analysis(my.preprocessed.list, annotation = NULL, initialrow = 1, initialcolumn = 2, treatment1col = 1, treatment2col = NULL, treatment = 1, omiclevel = "metabolome", scalation = 3, clusters = c(9,16), show.elbow.plot = FALSE )
+```
+and the k-means plot:
+```
+> kmeans_plot(my.kmeans,clusternumber = 16)```
+```
+<img src="/img/kmeans_clustering_plot.png" width="500" align="middle" alt="pRocessomics Kmeans plot">
+
+
 ...work in progress...
 please check back soon!
