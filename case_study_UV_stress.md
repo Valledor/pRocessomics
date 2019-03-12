@@ -9,7 +9,8 @@ Please note all listed omic layers are named and follow the same main structure,
 
 This package is meant to work with lists, even if you only want to process a single omic dataset you need your table to be in a list.
 The different elements in the list should be named (proteins, metabolites, etc.) and have the same number of rows. Each row correspond to a sample. Samples should have the same order within the different datasets to be analyzed (if you want to integrate the different datasets).
-If you have troubles importing your data into pRocessomics, **please check this tutorial**.
+
+If you have troubles importing your data into pRocessomics, [**please check this tutorial**](/dataimport.md).
 
 For this case stady you only need to load sample dataset. 
 
