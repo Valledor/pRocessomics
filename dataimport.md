@@ -14,7 +14,7 @@ As a golden rule: cases (samples) data will be in rows, while variables will be 
 With an Excel file properly formated, importing data is trivial:
 
 ```
-  > mydata <- datalist <- importfromexcel(excelfilename = "uvdataset.xlsx",treatment1col = 2, initialrow = 1,initialcol = 3)
+  > datalist <- importfromexcel(excelfilename = "uvdataset.xlsx",treatment1col = 2, initialrow = 1,initialcol = 3)
 ```
 The function has different arguments:
 
