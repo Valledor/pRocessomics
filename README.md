@@ -7,13 +7,12 @@ pRocessomics makes the integration of different omic levels easy
 * [Valledor Lab Website](http://www.valledor.info/)
 * [Processomics @ Valledor.info](http://processomics.valledor.info/)
 * [Download package](/binary)
-* [Importing data](/dataimport.md)
-* [Case study-Walkthrough](/case_study_UV_stress.md)
+* [Wiki and case studies](/wiki)
 
 # The problem
 *"I love writing scripts for omic data processing and statistical analyses!"* -- no one, ever
 
-**pRocessomics** is a simple but feature-rich pipeline for the statistical process of omics datasets. It was born out of the observation that this process is annoying and sometimes confusing; furthermore all the individual pieces of the process exist already but the available integrative solutions either don’t work, lack functions, are overly complicated or rely on non-free software. With **pRocessomics** you can perform state-of-the-art analyses done in less than 6 lines of code! And the best part is that you don’t almost even need to know R to use **pRocessomics** if you follow our detailed case studies! Furthermore a Shiny-based point-and-click interface is coming soon!
+**pRocessomics** is a simple but feature-rich pipeline for the statistical process of omics datasets. It was born out of the observation that this process is annoying and sometimes confusing; furthermore all the individual pieces of the process exist already but the available integrative solutions either don’t work, lack functions, are overly complicated or rely on non-free software. With **pRocessomics** you can perform state-of-the-art analyses done in less than 6 lines of code! And the best part is that you don’t almost even need to know R to use **pRocessomics** if you follow our detailed case studies and the information available in our [wiki](/wiki)
 
 <img alt="Processomics plots" align="center" src="img/plots_processomics.jpg">
 
