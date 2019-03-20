@@ -7,7 +7,7 @@ pRocessomics makes the integration of different omic levels easy
 * [Valledor Lab Website](http://www.valledor.info/)
 * [Processomics @ Valledor.info](http://processomics.valledor.info/)
 * [Download package](/binary)
-* [Wiki and case studies](/wiki)
+* [Wiki and Case Studies](https://github.com/Valledor/pRocessomics/wiki)
 
 # The problem
 *"I love writing scripts for omic data processing and statistical analyses!"* -- no one, ever
