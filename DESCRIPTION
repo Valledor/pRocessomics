@@ -8,8 +8,8 @@ Description: User friendly package for single and multi omics data analysis.
     
 License: Apache 2.0
 Depends: R (>= 3.5), MASS, lattice, ggplot2
-Imports: readxl, plyr, dplyr, igraph, rgl, ellipse, corpcor, RColorBrewer, parallel, dplyr,
+Imports: readxl, plyr, dplyr, igraph, rgl, ellipse, corpcor, RColorBrewer, parallel, dplyr, pheatmap,
         tidyr, reshape2, methods, matrixStats, rARPACK, gridExtra, mixOmics, plotly, ade4, omicade4,
-        ica, doParallel, VennDiagram, plotrix, impute, missForest, FSA, car
+        ica, doParallel, VennDiagram, plotrix, impute, missForest, FSA, car, writexl
 Encoding: UTF-8
 LazyData: true
