@@ -1,15 +1,16 @@
 Package: pRocessomics
 Type: Package
 Title: Omics Data Processing Functions and Integration Tools
-Version: 0.1.4
-Author: Luis Valledor and Laura Lamelas
+Version: 0.1.7
+Author: Luis Valledor <valledorluis@uniovi.es> and Laura Lamelas <lamelaslaura@uniovi.es>
 Maintainer: Luis Valledor <valledorluis@uniovi.es>
 Description: User friendly package for single and multi omics data analysis.
-    
-License: Apache 2.0
-Depends: R (>= 3.5), MASS, lattice, ggplot2
-Imports: readxl,plyr,dplyr,igraph,rgl,ellipse,corpcor,RColorBrewer,parallel,dplyr,pheatmap,
-        tidyr, reshape2, methods, matrixStats, rARPACK, gridExtra, mixOmics, plotly, ade4, omicade4,
-        ica, doParallel, VennDiagram, plotrix, impute, missForest, FSA, car, writexl
+License: Apache License (>= 2.0)
+Depends: R (>= 3.5)
+Imports: readxl, writexl, plyr, dplyr, igraph, RColorBrewer, parallel, pheatmap, foreach, iterators, randomForest,
+        reshape2, methods, grid, mixOmics, plotly, omicade4, itertools, MASS, grDevices, tcltk,
+        ica, doParallel, VennDiagram, plotrix, impute, missForest, FSA, car, webshot, utils, stats, graphics, ggplot2
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.0.2
+Roxygen: list(markdown = TRUE)
